@@ -30,10 +30,6 @@ export const GlobalStyle = createGlobalStyle`
   body {
     width: 100%;
     height: 100%;
-    display: flex;
-    justfy-content: center;
-    align-items: center;
-    flex-direction: column;
     background: linear-gradient(268.59deg, #0C0B1E 0.91%, #2A0F3B 51.75%, #0C0B1E 98.52%);
   }
 

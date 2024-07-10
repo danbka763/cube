@@ -2,6 +2,7 @@ import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
 const BaseButton = styled.button`
+  width: 100%;
   border: 0;
   border-bottom: 1px solid;
   border-radius: 5px;
