@@ -1,0 +1,1 @@
+export { VersionModuleText } from './version-module-text'
