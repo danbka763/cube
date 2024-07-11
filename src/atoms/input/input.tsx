@@ -4,10 +4,19 @@ import styled from "styled-components";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const StyledInput = styled.input`
-  width: 100%;
+const StyledInput = styled.input<{
+  width?: string | number;
+  padding?: string | number;
+}>`
+  width: ${({ width }) => {
+    if (width) return width + (typeof width === "number" ? "px" : "");
+    else return "100%";
+  }};
+  padding: ${({ padding }) => {
+    if (padding) return padding + (typeof padding === "number" ? "px" : "");
+    else return "8px 12px";
+  }};
   border: 1px solid;
-  padding: 8px 12px;
   border-color: #cbd5e1;
   border-radius: 6px;
   color: #00000080;
@@ -24,7 +33,9 @@ const StyledInput = styled.input`
   }
 `;
 
-export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  padding?: string | number;
+}
 
 export const Input = (props: IInputProps) => {
   const { children, ...anyProps } = props;

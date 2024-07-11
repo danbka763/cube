@@ -6,6 +6,8 @@ import { TextAndComponent } from "@/molecules/text-and-component";
 import { SelectComponent } from "@/molecules/select";
 import { SelectVariant } from "@/molecules/select-variant";
 import { Button } from "@/atoms/button";
+import { EVariant } from "@/model/variant";
+import { getRandomIntArbitrary } from "@/utils/random";
 
 const StyledGameComponent = styled.section`
   width: 100%;
@@ -27,49 +29,67 @@ const Content = styled.div`
 `;
 
 const CreatingBetButton = styled(Button)`
-  background-color: #37AC00;
-  border-color: #55F30A;
-`
+  background-color: #37ac00;
+  border-color: #55f30a;
+
+  &:hover {
+    background-color: #41ca00;
+    border-color: #7dff3f;
+  }
+`;
 
 export const Game = () => {
   const [rolling, setRolling] = useState(false);
+  const [variant, setVariant] = useState(EVariant.none);
+  const [bet, setBet] = useState(2);
+  const [dots, setDots] = useState(3);
 
   const rollDice = () => {
     setRolling(true);
+    const timeout = getRandomIntArbitrary(750, 1200)
+    const interval = setInterval(() => {
+      setDots(getRandomIntArbitrary(1, 6));
+    }, 25);
     setTimeout(() => {
+      clearInterval(interval);
       setRolling(false);
-    }, 1000);
+    }, timeout);
   };
 
   return (
     <StyledGameComponent>
       <Content>
-        <Text>Сделайте ставку</Text>
-        
-        <DiceRoller rolling={rolling} />
+        <Text fontSize={20}>Сделайте ставку</Text>
+
+        <DiceRoller rolling={rolling} dots={dots} setDots={setDots} />
 
         <TextAndComponent text="Размер ставки">
           <SelectComponent
             options={[
-              { value: "1", label: "1.00" },
-              { value: "2", label: "2.00" },
-              { value: "3", label: "3.00" },
-              { value: "5", label: "5.00" },
-              { value: "10", label: "10.00" },
-              { value: "25", label: "25.00" },
-              { value: "60", label: "60.00" },
-              { value: "100", label: "100.00" },
+              { value: 1, label: "1.00" },
+              { value: 2, label: "2.00" },
+              { value: 3, label: "3.00" },
+              { value: 5, label: "5.00" },
+              { value: 10, label: "10.00" },
+              { value: 25, label: "25.00" },
+              { value: 60, label: "60.00" },
+              { value: 100, label: "100.00" },
             ]}
-            value={"2"}
-            onChange={() => {}}
+            value={bet}
+            onChange={setBet}
           />
         </TextAndComponent>
 
         <TextAndComponent text="Варианты ставок">
-          <SelectVariant />
+          <SelectVariant controller={{ variant, setVariant }} />
         </TextAndComponent>
 
-        <CreatingBetButton>Сделать ставку</CreatingBetButton>
+        <CreatingBetButton
+          disabled={variant === EVariant.none}
+          onClick={rollDice}
+        >
+          Сделать ставку
+        </CreatingBetButton>
       </Content>
     </StyledGameComponent>
   );

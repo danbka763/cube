@@ -14,7 +14,7 @@ interface IProps {
 export const TextAndComponent: React.FC<IProps> = ({ text, children }) => {
   return (
     <Content>
-      <Text>{text}</Text>
+      <Text fontSize={14}>{text}</Text>
       {children}
     </Content>
   );

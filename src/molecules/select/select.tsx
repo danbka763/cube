@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { DropdownIcon, Select, SelectWrapper } from "@/atoms/select";
 
 interface Option {
-  value: string;
+  value: number;
   label: string;
 }
 
 interface SelectProps {
   options: Option[];
-  value: string;
-  onChange: (value: string) => void;
+  value: number;
+  onChange: (value: number) => void;
 }
 
 export const SelectComponent: React.FC<SelectProps> = ({
@@ -25,17 +25,20 @@ export const SelectComponent: React.FC<SelectProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIsOpen(false);
-    onChange(e.target.value);
+    onChange(Number(e.target.value));
   };
 
   return (
     <SelectWrapper setIsOpen={setIsOpen}>
       <Select
-        value={value}
+        value={String(value)}
         handleChange={handleChange}
         handleToggle={handleToggle}
         isOpen={isOpen}
-        options={options}
+        options={options.map((option) => ({
+          ...option,
+          value: String(option.value),
+        }))}
       />
       <DropdownIcon isOpen={isOpen} />
     </SelectWrapper>
