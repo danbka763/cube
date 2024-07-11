@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, useState } from "react";
 import styled from "styled-components";
 
-const BaseButton = styled.button<{ active?: boolean }>`
+const BaseButton = styled.button<{ $active?: boolean }>`
   width: 100%;
   border: 0;
   border-bottom: 1px solid;
@@ -10,15 +10,15 @@ const BaseButton = styled.button<{ active?: boolean }>`
   padding: 10px 16px;
   color: white;
   cursor: pointer;
-  background-color: ${({ active }) => (active ? "#f6a200" : "#643f82")};
-  border-color: ${({ active }) => (active ? "#d77400" : "#9159be")};
+  background-color: ${({ $active }) => ($active ? "#f6a200" : "#643f82")};
+  border-color: ${({ $active }) => ($active ? "#d77400" : "#9159be")};
 
   &:hover {
-    background-color: ${({ active }) => (active ? "#f6a200" : "#8151a8")};
-    border-color: ${({ active }) => (active ? "#d77400" : "#ab69e2")};
+    background-color: ${({ $active }) => ($active ? "#f6a200" : "#8151a8")};
+    border-color: ${({ $active }) => ($active ? "#d77400" : "#ab69e2")};
   }
 
-  &:active {
+  &: $active {
     background: #f6a200;
     border-color: #d77400;
   }
@@ -41,7 +41,7 @@ export const Button = (props: IButtonProps) => {
 
   return (
     <BaseButton
-      active={active || mouseDown}
+      $active={active || mouseDown}
       {...anyProps}
       onMouseDown={() => setMouseDown(true)}
       onMouseUp={() => setMouseDown(false)}

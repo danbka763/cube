@@ -10,6 +10,7 @@ import { EVariant } from "@/model/variant";
 import { getRandomIntArbitrary } from "@/utils/random";
 import { UserContext } from "@/contexts/user-context";
 import { calculateWin } from "@/utils/calculate-win";
+import { selectCollection } from "@/utils/select-collection";
 
 const StyledGameComponent = styled.section<{ disabled: boolean }>`
   width: 100%;
@@ -56,7 +57,7 @@ export const Game: React.FC = () => {
   const [rolling, setRolling] = useState(false);
   const [variant, setVariant] = useState(EVariant.none);
   const [specificNumber, setSpecificNumber] = useState(1);
-  const [bet, setBet] = useState(1);
+  const [bet, setBet] = useState(selectCollection[0].value);
   const [dots, setDots] = useState(1);
   const [firstStart, setFirstStart] = useState(true);
   const [win, setWin] = useState<number>();
@@ -76,15 +77,12 @@ export const Game: React.FC = () => {
 
   const calculate = useCallback(() => {
     const result = calculateWin(bet, dots, variant, specificNumber);
-    console.log({ bet, dots, variant, specificNumber });
     setWin(result);
     changeWallet(result);
   }, [bet, dots, variant, specificNumber]);
 
   useEffect(() => {
     if (!rolling && !firstStart) {
-      console.log(rolling, firstStart);
-      console.count();
       calculate();
     }
   }, [rolling, firstStart]);
@@ -118,13 +116,7 @@ export const Game: React.FC = () => {
 
         <TextAndComponent text="Размер ставки">
           <SelectComponent
-            options={[
-              { value: 1, label: "1.00" },
-              { value: 5, label: "5.00" },
-              { value: 10, label: "10.00" },
-              { value: 15, label: "15.00" },
-              { value: 20, label: "20.00" },
-            ]}
+            options={selectCollection}
             value={bet}
             onChange={setBet}
           />

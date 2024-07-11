@@ -6,14 +6,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 const StyledInput = styled.input<{
   width?: string | number;
-  padding?: string | number;
+  $padding?: string | number;
 }>`
   width: ${({ width }) => {
     if (width) return width + (typeof width === "number" ? "px" : "");
     else return "100%";
   }};
-  padding: ${({ padding }) => {
-    if (padding) return padding + (typeof padding === "number" ? "px" : "");
+  padding: ${({ $padding }) => {
+    if ($padding) return $padding + (typeof $padding === "number" ? "px" : "");
     else return "8px 12px";
   }};
   border: 1px solid;
@@ -38,10 +38,10 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = (props: IInputProps) => {
-  const { children, ...anyProps } = props;
+  const { children, padding, ...anyProps } = props;
 
   return (
-    <StyledInput className={inter.className} {...anyProps}>
+    <StyledInput $padding={padding} className={inter.className} {...anyProps}>
       {children}
     </StyledInput>
   );

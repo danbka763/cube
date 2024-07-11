@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import { fetchUser } from "@/api/fetchUser";
+import React, { createContext, useEffect, useState } from "react";
 
 const UserContext = createContext(
   {} as {
@@ -11,7 +12,11 @@ const UserContext = createContext(
   }
 );
 
-const UserContextProvider = (props: { children: JSX.Element }) => {
+interface IProps {
+  children: JSX.Element | JSX.Element[];
+}
+
+const UserContextProvider = (props: IProps) => {
   const { children } = props;
 
   const [auth, setAuth] = useState(false);
@@ -22,7 +27,13 @@ const UserContextProvider = (props: { children: JSX.Element }) => {
     setWallet((wallet) => wallet + count);
   };
 
-  console.log({wallet})
+  console.log("wallet: ", wallet);
+
+  useEffect(() => {
+    // Представим, что я сохраняю данные пользователя для последующего использования
+    // А потом красиво где-нибудь вывожу "С возвращением..."
+    fetchUser().then((res) => res?.id && setAuth(true));
+  }, []);
 
   return (
     <UserContext.Provider

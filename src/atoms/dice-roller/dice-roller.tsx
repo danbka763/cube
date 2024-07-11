@@ -60,7 +60,7 @@ const roll = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
-const Dice = styled.div<{ rolling: boolean; dots: number }>`
+const Dice = styled.div<{ $rolling: boolean; $dots: number }>`
   width: 92.26px;
   height: 92.26px;
   background-color: white;
@@ -68,9 +68,9 @@ const Dice = styled.div<{ rolling: boolean; dots: number }>`
   display: flex;
   padding: 10px;
 
-  ${({ dots }) => getStylesByDots(dots)}
+  ${({ $dots }) => getStylesByDots($dots)}
 
-  animation: ${({ rolling }) => (rolling ? roll : "none")} 0.35s linear infinite;
+  animation: ${({ $rolling }) => ($rolling ? roll : "none")} 0.35s linear infinite;
 `;
 
 const Dot = styled.div`
@@ -89,12 +89,12 @@ export const DiceRoller: React.FC<IProps> = ({ rolling, dots }) => {
   let dotsRender = [];
 
   for (let dot = 1; dot <= dots; dot++)
-    dotsRender.push(<Dot className="dot" />);
+    dotsRender.push(<Dot className="dot" key={dot} />);
 
   return (
     <DiceContainer>
       <div>
-        <Dice rolling={rolling} dots={dots}>
+        <Dice $rolling={rolling} $dots={dots}>
           {dotsRender}
         </Dice>
       </div>

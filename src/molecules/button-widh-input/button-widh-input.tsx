@@ -27,7 +27,6 @@ export const ButtonWithInput: React.FC<IButtonWithInputProps> = (props) => {
         disabled={!active}
         width={30}
         padding={"4px 10px"}
-        defaultValue={1}
       />
     </StyledButtonWithInput>
   );

@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Input } from "../input";
-import { Button } from "../button";
 import Image from "next/image";
+import { FormEventHandler } from "react";
 
 const ModalContainer = styled.div<{ $open: boolean }>`
   position: absolute;
@@ -17,7 +16,7 @@ const ModalContainer = styled.div<{ $open: boolean }>`
   align-items: center;
 `;
 
-const BodyModalContainer = styled.div`
+const BodyModalContainer = styled.form`
   background-color: #250e36;
   border: 1px solid #4b2964;
   border-radius: 4px;
@@ -48,6 +47,7 @@ const Exit = styled.button`
 
 interface IProps {
   controller: { open: boolean; setOpen: (open: boolean) => void };
+  onSubmit: FormEventHandler<HTMLFormElement>;
   children: JSX.Element | JSX.Element[];
 }
 
@@ -55,10 +55,11 @@ export const Modal: React.FC<IProps> = (props) => {
   const {
     controller: { open, setOpen },
     children,
+    onSubmit,
   } = props;
   return (
     <ModalContainer $open={open}>
-      <BodyModalContainer>
+      <BodyModalContainer onSubmit={onSubmit}>
         <Exit onClick={() => setOpen(false)}>
           <Image src="/exit.svg" alt="exit" width={14.6} height={14} />
         </Exit>
