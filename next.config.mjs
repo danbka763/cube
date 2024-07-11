@@ -9,11 +9,13 @@ const nextConfig = async () => {
   return {
     compiler: {
       styledComponents: true,
+      swcMinify: true,
+      swcLoader: true,
     },
     env: {
       APP_VERSION: packageJson.version,
     },
-    output: 'export',
+    output: "export",
     images: {
       unoptimized: true,
     },
