@@ -1,5 +1,5 @@
 import { Button } from "@/atoms/button";
-import { AuthContext } from "@/contexts/auth-context";
+import { UserContext } from "@/contexts/user-context";
 import { useContext } from "react";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ const ButtonContainer = styled.div`
 `;
 
 export const Auth = () => {
-  const { setOpenModal } = useContext(AuthContext);
+  const { setOpenModal } = useContext(UserContext);
   return (
     <ButtonContainer>
       <Button onClick={() => setOpenModal(true)}>Вход</Button>

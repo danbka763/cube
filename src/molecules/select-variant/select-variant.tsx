@@ -19,10 +19,15 @@ interface IProps {
     variant: EVariant;
     setVariant: (variant: EVariant) => void;
   };
+  specific: {
+    specificNumber: number;
+    setSpecificNumber: (num: number) => void;
+  }
 }
 
 export const SelectVariant: React.FC<IProps> = (props) => {
   const { variant, setVariant } = props.controller;
+  const { specificNumber, setSpecificNumber } = props.specific;
 
   return (
     <Container>
@@ -31,7 +36,7 @@ export const SelectVariant: React.FC<IProps> = (props) => {
       <Button onClick={() => setVariant(EVariant.range1to3)} active={variant === EVariant.range1to3}>От 1 до 3</Button>
       <Button onClick={() => setVariant(EVariant.range4to6)} active={variant === EVariant.range4to6}>От 4 до 6</Button>
       <CustomVariant>
-        <ButtonWithInput onClick={() => setVariant(EVariant.specificNumber)} active={variant === EVariant.specificNumber} />
+        <ButtonWithInput onClick={() => setVariant(EVariant.specificNumber)} active={variant === EVariant.specificNumber} specificNumber={specificNumber} setSpecificNumber={setSpecificNumber} />
       </CustomVariant>
     </Container>
   );

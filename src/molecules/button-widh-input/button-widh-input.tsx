@@ -10,12 +10,20 @@ const StyledButtonWithInput = styled(Button)`
   align-items: center;
 `;
 
-export const ButtonWithInput: React.FC<IButtonProps> = (props) => {
-  const { active } = props;
+interface IButtonWithInputProps extends IButtonProps {
+  specificNumber: number;
+  setSpecificNumber: (num: number) => void;
+}
+
+export const ButtonWithInput: React.FC<IButtonWithInputProps> = (props) => {
+  const { specificNumber, setSpecificNumber, ...anyProps } = props;
+  const { active } = anyProps;
   return (
-    <StyledButtonWithInput {...props}>
+    <StyledButtonWithInput {...anyProps}>
       <Text>Конкретное число</Text>
       <Input
+        value={specificNumber}
+        onChange={(e) => setSpecificNumber(Number(e.target.value))}
         disabled={!active}
         width={30}
         padding={"4px 10px"}
