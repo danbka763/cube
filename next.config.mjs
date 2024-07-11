@@ -13,7 +13,7 @@ const nextConfig = async () => {
     env: {
       APP_VERSION: packageJson.version,
     },
-    output: "export",
+    // output: "export",
     images: {
       unoptimized: true,
     },
