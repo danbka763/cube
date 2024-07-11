@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { promises as fs } from "fs";
+import path from "path";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = async () => {
@@ -12,6 +12,10 @@ const nextConfig = async () => {
     },
     env: {
       APP_VERSION: packageJson.version,
+    },
+    output: 'export',
+    images: {
+      unoptimized: true,
     },
   };
 };
