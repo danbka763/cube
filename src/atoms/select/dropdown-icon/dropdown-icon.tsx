@@ -18,7 +18,7 @@ interface IDropdownProps {
 export const DropdownIcon: React.FC<IDropdownProps> = ({ isOpen }) => {
   return (
     <StyledDropdownIcon
-      src="/dropdown-icon.svg"
+      src="./dropdown-icon.svg"
       alt="dropdown icon"
       $isOpen={isOpen}
       width={8}

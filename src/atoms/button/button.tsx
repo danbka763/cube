@@ -1,4 +1,5 @@
-import { ButtonHTMLAttributes, useState } from "react";
+"use client";
+import React, { ButtonHTMLAttributes, useState } from "react";
 import styled from "styled-components";
 
 const BaseButton = styled.button<{ $active?: boolean }>`

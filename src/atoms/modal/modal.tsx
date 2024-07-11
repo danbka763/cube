@@ -61,7 +61,7 @@ export const Modal: React.FC<IProps> = (props) => {
     <ModalContainer $open={open}>
       <BodyModalContainer onSubmit={onSubmit}>
         <Exit onClick={() => setOpen(false)}>
-          <Image src="/exit.svg" alt="exit" width={14.6} height={14} />
+          <Image src="./exit.svg" alt="exit" width={14.6} height={14} />
         </Exit>
         {children}
       </BodyModalContainer>

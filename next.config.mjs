@@ -8,9 +8,7 @@ const nextConfig = async () => {
 
   return {
     compiler: {
-      styledComponents: true,
-      swcMinify: true,
-      swcLoader: true,
+      styledComponents: true
     },
     env: {
       APP_VERSION: packageJson.version,
