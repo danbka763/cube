@@ -1,6 +1,6 @@
 import { Text } from "@/atoms/text";
 import { DiceRoller } from "@/atoms/dice-roller";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { TextAndComponent } from "@/molecules/text-and-component";
 import { SelectComponent } from "@/molecules/select";
@@ -8,14 +8,20 @@ import { SelectVariant } from "@/molecules/select-variant";
 import { Button } from "@/atoms/button";
 import { EVariant } from "@/model/variant";
 import { getRandomIntArbitrary } from "@/utils/random";
+import { AuthContext } from "@/contexts/auth-context";
 
-const StyledGameComponent = styled.section`
+const StyledGameComponent = styled.section<{ disabled: boolean }>`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  & > * {
+    pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+    opacity: ${({ disabled }) => (disabled ? "50%" : 1)};
+  }
 `;
 
 const Content = styled.div`
@@ -38,15 +44,17 @@ const CreatingBetButton = styled(Button)`
   }
 `;
 
-export const Game = () => {
+export const Game: React.FC = () => {
+  const disabled = !useContext(AuthContext).auth;
+  
   const [rolling, setRolling] = useState(false);
   const [variant, setVariant] = useState(EVariant.none);
   const [bet, setBet] = useState(2);
-  const [dots, setDots] = useState(3);
+  const [dots, setDots] = useState(1);
 
   const rollDice = () => {
     setRolling(true);
-    const timeout = getRandomIntArbitrary(750, 1200)
+    const timeout = getRandomIntArbitrary(750, 1200);
     const interval = setInterval(() => {
       setDots(getRandomIntArbitrary(1, 6));
     }, 25);
@@ -57,11 +65,11 @@ export const Game = () => {
   };
 
   return (
-    <StyledGameComponent>
+    <StyledGameComponent disabled={disabled}>
       <Content>
         <Text fontSize={20}>Сделайте ставку</Text>
 
-        <DiceRoller rolling={rolling} dots={dots} setDots={setDots} />
+        <DiceRoller rolling={rolling} dots={dots} />
 
         <TextAndComponent text="Размер ставки">
           <SelectComponent

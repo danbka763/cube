@@ -1,7 +1,8 @@
 import { Text } from "@/atoms/text";
+import { AuthContext } from "@/contexts/auth-context";
 import { Auth } from "@/molecules/auth";
 import { VersionModule } from "@/molecules/version-module";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
@@ -14,7 +15,7 @@ const StyledHeader = styled.header`
 `;
 
 export const Header = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const { auth: isAuth } = useContext(AuthContext);
   return (
     <StyledHeader>
       <Text>Test Game</Text>

@@ -23,6 +23,7 @@
       "@/molecules": ["./src/molecules"],
       "@/organisms": ["./src/organisms"],
       "@/templates": ["./src/templates"],
+      "@/contexts": ["./src/contexts"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

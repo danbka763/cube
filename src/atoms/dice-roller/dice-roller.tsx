@@ -83,10 +83,9 @@ const Dot = styled.div`
 interface IProps {
   rolling: boolean;
   dots: number;
-  setDots: (dots: number) => void;
 }
 
-export const DiceRoller: React.FC<IProps> = ({ rolling, dots, setDots }) => {
+export const DiceRoller: React.FC<IProps> = ({ rolling, dots }) => {
   let dotsRender = [];
 
   for (let dot = 1; dot <= dots; dot++)
