@@ -13,10 +13,11 @@ const nextConfig = async () => {
     env: {
       APP_VERSION: packageJson.version,
     },
-    // output: "export",
+    output: "export", // Закомментить, если запускаемся через yarn start
     images: {
       unoptimized: true,
     },
+    reactStrictMode: true
   };
 };
 

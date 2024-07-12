@@ -11,8 +11,8 @@ export const InputWithError: React.FC<IPropsWithError> = (props) => {
 
   return (
     <div>
-      <Input {...anyProps} />
-      {error && <Text color={"red"}>Error</Text>}
+      <Input borderColor={error ? "#FF0000" : undefined} {...anyProps} />
+      {error && <Text color={"#FF0000"}>Error</Text>}
     </div>
   );
 };
