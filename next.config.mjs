@@ -18,6 +18,7 @@ const nextConfig = async () => {
     },
     reactStrictMode: true,
 
+    output: "export",
     basePath: "/cube",
     assetPrefix: "/cube/",
   };
