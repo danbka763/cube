@@ -8,16 +8,18 @@ const nextConfig = async () => {
 
   return {
     compiler: {
-      styledComponents: true
+      styledComponents: true,
     },
     env: {
       APP_VERSION: packageJson.version,
     },
-    output: "export", // Закомментить, если запускаемся через yarn start
     images: {
       unoptimized: true,
     },
-    reactStrictMode: true
+    reactStrictMode: true,
+
+    basePath: "/cube",
+    assetPrefix: "/cube/",
   };
 };
 
