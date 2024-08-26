@@ -2,9 +2,15 @@ import { promises as fs } from "fs";
 import path from "path";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = async () => {
+const nextConfig = () => {
   const packageJsonPath = path.join(process.cwd(), "package.json");
-  const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf8"));
+
+  let packageJson = {};
+  try {
+    packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
+  } catch (error) {
+    console.error("Error reading package.json:", error);
+  }
 
   return {
     compiler: {
@@ -18,7 +24,7 @@ const nextConfig = async () => {
     },
     reactStrictMode: true,
 
-    output: "export",
+    // output: "export",
     basePath: "/cube",
     assetPrefix: "/cube/",
   };
