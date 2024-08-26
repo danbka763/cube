@@ -1,33 +1,22 @@
-// import { promises as fs } from "fs";
-// import path from "path";
+import { promises as fs } from "fs";
+import path from "path";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = () => {
-  // const packageJsonPath = path.join(process.cwd(), "package.json");
-
-  let packageJson = {};
-  // try {
-  //   packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
-  // } catch (error) {
-  //   console.error("Error reading package.json:", error);
-  // }
+const nextConfig = async () => {
+  const packageJsonPath = path.join(process.cwd(), "package.json");
+  const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf8"));
 
   return {
     compiler: {
       styledComponents: true,
     },
     env: {
-      // APP_VERSION: packageJson.version,
-      APP_VERSION: "0.0.1",
+      APP_VERSION: packageJson.version,
     },
     images: {
       unoptimized: true,
     },
     reactStrictMode: true,
-
-    // output: "export",
-    // basePath: "/cube",
-    // assetPrefix: "/cube/",
   };
 };
 
